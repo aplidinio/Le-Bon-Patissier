@@ -1,0 +1,27 @@
+{% extends "HomeApp/base.html" %}
+
+{%load static %}
+
+{% block content %}
+
+<div class="contentForm">
+
+    {% if "valid" in request.GET %}
+
+        <p style="color:white;">Mensaje enviado con éxito</p>
+
+    {% elif "notvalid" in request.GET %}
+
+        <p style="color:red;">El mensaje no se pudo enviar</p>
+
+
+    {% endif %}
+
+    <form action="" method="POST" style="text-align: center;">
+        {% csrf_token %}  <!-- security key -->
+        <table style="margin: 20px auto;">{{myform.as_table}}</table>
+        <input type="submit" value="Enviar" style="width: 150px">
+    </form>
+</div>
+
+{% endblock %}

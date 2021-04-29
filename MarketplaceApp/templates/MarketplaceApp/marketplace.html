@@ -1,0 +1,42 @@
+{% extends "HomeApp/base.html" %}
+
+{%load static %}
+
+{% block content %}
+<div class="container">
+    <div style="float: right;">
+        <div class="card" style="width: 60%; margin: 10px 10px;">
+            <p class="card-text" style="font-size: smaller; text-align: center;"><b>Artículos</b></p>
+            <p class="text-center" style="font-size: smaller;">12</p>
+            <a href="{% url 'cart' %}" class="btn btn-light"><img src="../../../media/shoppingcart/carrito.jpeg" alt="Ir a caja" style="width: 50%;"></a>
+        </div>>
+    </div>
+    <div class="row">
+
+        {% for product in products %}
+
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+
+            <div class="card" id="product" style="width: 100%; margin: 10px 10px;">
+                <img src="{{product.image.url}}" class="card-img-top">
+                <div class="card-body" style="text-align: center;">
+                    <h6 class="card-title" style="font-weight: bold;">{{product.name}}</h6>
+                    <p class="card-text">{{product.price}}&nbsp;€</p>
+                    <p style="font-size: smaller;"><i>{{product.price_by_unit|default_if_none:'Unidad'}}</i></p>
+                </div>
+                <div class="card-footer text-center">
+                    <a id="add" href="#"><button value={{ product }}>Al carro</button></a>
+                    <a id="clear" href="#">Clear Cart</a>
+                    <a id="up" href="{% url 'add' %}" class="btn btn-light" onclick="{{product.name }}">+</a>
+                    <a id="down" href="{% url 'delete' %}" class="btn btn-light" onclick="{{product.name }}">-</a>
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}
